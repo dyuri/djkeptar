@@ -96,3 +96,9 @@ INSTALLED_APPS = (
     'south',
     'keptar',
 )
+
+KEPTAR_ROOT='/var/www/foto'
+KEPTAR_EXTENSIONS=['jpg','jpeg','png']
+KEPTAR_THUMBDIR='.tn'
+KEPTAR_THUMBSIZE=(200,200)
+
