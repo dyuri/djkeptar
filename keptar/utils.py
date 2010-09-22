@@ -11,7 +11,7 @@ class FileNotFound(Exception):
 class NotDirectory(Exception):
     pass
 
-def get_filelist(path):
+def get_filelist(path, show_hidden=getattr(settings, 'KEPTAR_SHOW_HIDDEN', False)):
     """Visszaadja a ``path`` konyvtarban levo konyvtarak es fileok listajat.
     A ``path`` a ``settings.KEPTAR_ROOT``-hoz relativ.
     A konyvtarak es a fileok listajat ket kulon listaban adja vissza.
@@ -20,7 +20,6 @@ def get_filelist(path):
     """
 
     abspath = os.path.abspath(os.path.join(settings.KEPTAR_ROOT, path))
-    print abspath
     # vajon a celkonyvtar valoban a root-on belul talalhato? - /../... miatt
     if not abspath.startswith(settings.KEPTAR_ROOT):
         raise AccessDenied(abspath)
@@ -33,13 +32,12 @@ def get_filelist(path):
 
     for fname in os.listdir(abspath):
         file = os.path.join(abspath, fname)
-        if os.path.isdir(file):
+        if os.path.isdir(file) and (show_hidden or not fname.startswith('.')):
             dirs.append(fname)
         if os.path.isfile(file):
-            print file
             # a kiterjesztes tamogatott-e
             ext = file[file.rfind('.')+1:]
-            if ext.lower() in settings.KEPTAR_EXTENSIONS:
+            if ext.lower() in settings.KEPTAR_EXTENSIONS and (show_hidden or not fname.startswith('.')):
                 pictures.append(fname)
 
     return dirs, pictures
