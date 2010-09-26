@@ -83,6 +83,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
@@ -98,8 +99,12 @@ INSTALLED_APPS = (
 )
 
 KEPTAR_ROOT='/var/www/foto'
+KEPTAR_URL='http://dyuri.horak.hu/foto/'
 KEPTAR_EXTENSIONS=['jpg','jpeg','png']
 KEPTAR_THUMBDIR='.tn'
-KEPTAR_THUMBSIZE=(200,200)
+KEPTAR_THUMBSIZE=(120,120)
 KEPTAR_SHOW_HIDDEN=False
+KEPTAR_ICONS={
+        'dir': 'http://dyuri.horak.hu/keptar/icons/tn_dir.jpg',
+        }
 
