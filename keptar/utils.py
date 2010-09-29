@@ -49,6 +49,20 @@ def enrich(filelist, relpath='', thumbnails=True):
     return files
 
 
+def get_parent(path):
+    """A megadott elem szulokonyvtarat adja meg"""
+
+    # security check
+    parent = os.path.dirname(path)
+
+    try:
+        get_abspath(parent)
+    except:
+        parent = ''
+
+    return parent
+
+
 def get_abspath(path):
     """AccessDenied exceptiont dob, ha valaki cselezni akar"""
 

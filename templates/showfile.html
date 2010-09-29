@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block 'main' %}
-<h1>showfile</h1>
-<p>fname: {{ fname }}</p>
-<p>fdata: {{ fdata }}</p>
+<h1>{{ fname }}</h1>
+<a href="{% url listdir parent %}">parent{% if parent %} ({{ parent }}){% endif %}</a>
+
+<div>
+  <img alt="{{ fname }}" src="{{ fdata.direct_url }}"/>
+</div>
 {% endblock %}

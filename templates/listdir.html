@@ -2,10 +2,11 @@
 
 {% block 'main' %}
 <h1>{{ path }}</h1>
+<a href="{% url listdir parent %}">parent{% if parent %} ({{ parent }}){% endif %}</a>
 
 <ul>
 {% for fname,fdata in files.items %}
-  <li><a href="{{ fdata.url }}">{{ fname }}</a></li>
+  <li><a href="{{ fdata.url }}"><img alt="{{ fname }}" src="{{ fdata.thumb }}"/> {{ fname }}</a></li>
 {% endfor %}
 </ul>
 
