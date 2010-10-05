@@ -2,6 +2,10 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 import os, os.path
 import Image
+try:
+    from collections import OrderedDict
+except ImportError:
+    from keptar.odict import OrderedDict
 
 class AccessDenied(Exception):
     pass
@@ -15,7 +19,7 @@ class NotDirectory(Exception):
 def enrich(filelist, relpath='', thumbnails=True):
     """A kep neveihez hozzateszi a szukseges adatokat"""
 
-    files = {}
+    files = OrderedDict()
 
     for f in filelist:
         abspath = os.path.abspath(os.path.join(settings.KEPTAR_ROOT, relpath, f))
@@ -100,6 +104,9 @@ def get_filelist(path, show_hidden=getattr(settings, 'KEPTAR_SHOW_HIDDEN', False
             ext = file[file.rfind('.')+1:]
             if ext.lower() in settings.KEPTAR_EXTENSIONS and (show_hidden or not fname.startswith('.')):
                 pictures.append(fname)
+
+    dirs.sort()
+    pictures.sort()
 
     return enrich(dirs+pictures, relpath=path)
 
