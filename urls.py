@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^/?$', 'keptar.views.listdir'),
     url(r'^list/(?P<path>.*)$', 'keptar.views.listdir', name='listdir'),
     url(r'^show/(?P<fname>.*)$', 'keptar.views.showfile', name='showfile'),
+    url(r'^submitpbe$', 'keptar.views.submitpbentry', name='submitpbentry'),
     url(r'^admin/', include(admin.site.urls)),
 
     # media files

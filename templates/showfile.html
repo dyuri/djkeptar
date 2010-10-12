@@ -4,6 +4,14 @@
 <h1>{{ fname }}</h1>
 <a href="{% url listdir parent %}">parent{% if parent %} ({{ parent }}){% endif %}</a>
 
+{% if pbform %}
+<form action="{% url submitpbentry %}" method="post">
+  {% csrf_token %}
+  {{ pbform.as_p }}
+  <p><input type="submit" name="submitpbe" value="Ok" /></p>
+</form>
+{% endif %}
+
 <div>
   <img alt="{{ fname }}" src="{{ fdata.direct_url }}"/>
 </div>
