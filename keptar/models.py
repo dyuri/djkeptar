@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
-from keptar.utils import get_abspath
+from keptar.utils import get_abspath, enrich
 import os.path
 
 class PBlogEntry(models.Model):
@@ -26,5 +26,11 @@ class PBlogEntry(models.Model):
 
         return os.path.isfile(abspath)
 
+    @property
+    def fdata(self):
+        """a fizikai filehoz tartozo adatok"""
+        return enrich([self.path])[self.path]
+
     def __unicode__(self):
         return u"%s (%s)" % (self.title, self.path)
+

@@ -6,7 +6,9 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^/?$', 'keptar.views.listdir'),
+    url(r'^pblog/(?P<id>\d+)/(?P<slug>[\w-]*)/$', 'keptar.views.pblog', name='pblog'),
+    url(r'^pblog/(?P<id>\d+)/$', 'keptar.views.pblog'),
+    url(r'^/?$', 'keptar.views.pblog'),
     url(r'^list/(?P<path>.*)$', 'keptar.views.listdir', name='listdir'),
     url(r'^show/(?P<fname>.*)$', 'keptar.views.showfile', name='showfile'),
     url(r'^submitpbe$', 'keptar.views.submitpbentry', name='submitpbentry'),

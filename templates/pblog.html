@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+{% if pbe %}
+<h1>{{ pbe.title }}</h1>
+<div class="nav">
+  {% if prev %}<a href="{% url pblog prev.id prev.title|slugify %}">Previous</a>{% endif %}
+  <a href="{% url showfile pbe.path %}">Browse</a>
+  {% if next %}<a href="{% url pblog next.id next.title|slugify %}">Next</a>{% endif %}
+</div>
+
+<h2 class="tags">Tags: 
+  {% for tag in pbe.tags.all %}
+  <span class="tag">{{ tag }}</span>{% if not forloop.last %}, {% endif %}
+  {% endfor %}
+</h2>
+
+<div>
+  <img alt="{{ pbe.title }}" src="{{ pbe.fdata.direct_url }}"/>
+</div>
+{% else %}
+<h1>The photoblog is still empty...</h1>
+{% endif %}
+{% endblock %}
