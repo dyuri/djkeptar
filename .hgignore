@@ -4,4 +4,4 @@ syntax: glob
 keptar.sqlite
 *.pyc
 *~
-
+.tn

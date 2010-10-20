@@ -73,7 +73,7 @@ def get_abspath(path):
     abspath = os.path.abspath(os.path.join(settings.KEPTAR_ROOT, path))
     # vajon a celkonyvtar valoban a root-on belul talalhato? - /../... miatt
     if not abspath.startswith(settings.KEPTAR_ROOT):
-        raise AccessDenied(abspath)
+        raise AccessDenied("%s < %s" % (abspath, settings.KEPTAR_ROOT))
     
     return abspath
 

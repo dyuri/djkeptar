@@ -60,6 +60,8 @@ def submitpbentry(request):
     illetve ha mar szerepel ott, akkor az adatainak megvaltoztatasa
     """
 
+    # TODO: hibakezeles
+
     # ha nincs belepve, akkor nem szabad
     # NOTE: @login_required dekoratorral szebb lenne, csak kene belepteto oldal
     if not request.user.is_authenticated:

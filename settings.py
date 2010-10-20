@@ -99,13 +99,13 @@ INSTALLED_APPS = (
     'keptar',
 )
 
-KEPTAR_ROOT='/var/www/foto'
-KEPTAR_URL='http://dyuri.horak.hu/foto/'
+KEPTAR_ROOT=os.path.abspath(os.path.join(PROJECT_DIR, 'images'))
+KEPTAR_URL='/images/'
 KEPTAR_EXTENSIONS=['jpg','jpeg','png']
 KEPTAR_THUMBDIR='.tn'
 KEPTAR_THUMBSIZE=(120,120)
 KEPTAR_SHOW_HIDDEN=False
 KEPTAR_ICONS={
-        'dir': 'http://dyuri.horak.hu/keptar/icons/tn_dir.jpg',
+        'dir': '/media/icons/tn_dir.jpg',
         }
 

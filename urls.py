@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+import os.path
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -16,4 +17,5 @@ urlpatterns = patterns('',
 
     # media files
     url(r'media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    url(r'images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_DIR, 'images')}),
 )
