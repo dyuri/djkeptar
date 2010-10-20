@@ -85,14 +85,21 @@ def submitpbentry(request):
     return HttpResponseRedirect(reverse('showfile', args=[pbe.path]))
 
 
-def pblog(request, id=None, slug=None):
+def pblog(request, id=None, tag=None, slug=None):
     """photoblog bejegyzes megjelenitese"""
+
+    # ha van tag megadva, akkor csak az adott taggel rendelkezo kepek jatszanak
+    if tag is None:
+        qbase = PBlogEntry.objects;
+    else:
+        qbase = PBlogEntry.objects.filter(tags__name=tag)
+
     try:
         # ha az id nincs megadva, akkor a legutolsot jelenitjuk meg
         if id is None:
-            pbe = PBlogEntry.objects.latest('mark_date')
+            pbe = qbase.latest('mark_date')
         else:
-            pbe = PBlogEntry.objects.get(pk=id)
+            pbe = qbase.get(pk=id)
     except PBlogEntry.DoesNotExist:
         # hibas id volt megadva, vagy nincs meg bejegyzes
         return render_to_response('pblog.html', 
@@ -100,16 +107,17 @@ def pblog(request, id=None, slug=None):
             context_instance = RequestContext(request))
 
     # elozo es kovetkezo elem meghatarozasa
-    next = PBlogEntry.objects.filter(mark_date__gt=pbe.mark_date).order_by('mark_date')[:1]
+    next = qbase.filter(mark_date__gt=pbe.mark_date).order_by('mark_date')[:1]
     # python 2.6+
     # next = next if next else None
     if next:
         next = next[0]
-    prev = PBlogEntry.objects.filter(mark_date__lt=pbe.mark_date).order_by('-mark_date')[:1]
+    prev = qbase.filter(mark_date__lt=pbe.mark_date).order_by('-mark_date')[:1]
     if prev:
         prev = prev[0]
 
     return render_to_response('pblog.html', {
+        'searchtag': tag,
         'pbe': pbe,
         'next': next,
         'prev': prev,

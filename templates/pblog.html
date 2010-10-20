@@ -3,15 +3,23 @@
 {% block 'main' %}
 {% if pbe %}
 <h1>{{ pbe.title }}</h1>
+{% if searchtag %}<p>Keresés <span class="tag">{{ searchtag }}</span> címke alapján</p>{% endif %}
 <div class="nav">
-  {% if prev %}<a href="{% url pblog prev.id prev.title|slugify %}">Previous</a>{% endif %}
+  {% if searchtag %}
+    {% url tagsearchid searchtag prev.id as prevurl %}
+    {% url tagsearchid searchtag next.id as nexturl %}
+  {% else %}
+    {% url pblog prev.id prev.title|slugify as prevurl %}
+    {% url pblog next.id next.title|slugify as nexturl %}
+  {% endif %}
+  {% if prev %}<a href="{{ prevurl }}">Previous</a>{% endif %}
   <a href="{% url showfile pbe.path %}">Browse</a>
-  {% if next %}<a href="{% url pblog next.id next.title|slugify %}">Next</a>{% endif %}
+  {% if next %}<a href="{{ nexturl}}">Next</a>{% endif %}
 </div>
 
 <h2 class="tags">Tags: 
   {% for tag in pbe.tags.all %}
-  <span class="tag">{{ tag }}</span>{% if not forloop.last %}, {% endif %}
+  <a class="tag" href="{% url tagsearch tag %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
   {% endfor %}
 </h2>
 
@@ -19,6 +27,11 @@
   <img alt="{{ pbe.title }}" src="{{ pbe.fdata.direct_url }}"/>
 </div>
 {% else %}
-<h1>The photoblog is still empty...</h1>
+
+<h1>Nincs ilyen kép.</h1>
+{% if user.is_authenticated %}
+<a href="{% url listdir '' %}">Böngészés</a>
+{% endif %}
+
 {% endif %}
 {% endblock %}
