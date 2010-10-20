@@ -23,7 +23,7 @@ def listdir(request, path=""):
         }, context_instance = RequestContext(request))
 
 
-def showfile(request, fname):
+def showfile(request, fname, form=None):
     """egy adott kep megjelenitese"""
 
     # TODO: itt lehet csak valami kisebb felbontasu kepet kene mutatni
@@ -37,13 +37,15 @@ def showfile(request, fname):
     
     # ha be van lepve valaki, akkor beteheti a kepet a photoblogba
     if request.user.is_authenticated:
-        try:
-            # ha az elem mar szerepel az adatbazisban, akkor a formban az o
-            # adatait szeretnenk latni
-            form = PBlogEntryForm(instance=PBlogEntry.objects.get(path=fname))
-        except PBlogEntry.DoesNotExist:
-            # ha nem szerepel, akkor uj, ures formot szeretnenk
-            form = PBlogEntryForm(initial={'path': fname})
+        if form is None:
+            try:
+                # ha az elem mar szerepel az adatbazisban, akkor a formban az
+                # o adatait szeretnenk latni
+                form = PBlogEntryForm(
+                        instance=PBlogEntry.objects.get(path=fname))
+            except PBlogEntry.DoesNotExist:
+                # ha nem szerepel, akkor uj, ures formot szeretnenk
+                form = PBlogEntryForm(initial={'path': fname})
     else:
         form = None
 
@@ -60,8 +62,6 @@ def submitpbentry(request):
     illetve ha mar szerepel ott, akkor az adatainak megvaltoztatasa
     """
 
-    # TODO: hibakezeles
-
     # ha nincs belepve, akkor nem szabad
     # NOTE: @login_required dekoratorral szebb lenne, csak kene belepteto oldal
     if not request.user.is_authenticated:
@@ -75,12 +75,15 @@ def submitpbentry(request):
         # ha nem szerepel, akkor uj elemet hozunk letre a form alapjan
         f = PBlogEntryForm(request.POST)
 
-    # ha a felhasznalot nem raknank hozza, akkor siman menthetnkenk,
-    # igy viszont kulon kell menteni a kapcsolodo adatokat is (tag)
-    pbe = f.save(commit=False)
-    pbe.user = request.user
-    pbe.save()
-    f.save_m2m()
+    if f.is_valid():
+        # ha a felhasznalot nem raknank hozza, akkor siman menthetnkenk,
+        # igy viszont kulon kell menteni a kapcsolodo adatokat is (tag)
+        pbe = f.save(commit=False)
+        pbe.user = request.user
+        pbe.save()
+        f.save_m2m()
+    else:
+        return showfile(request, request.POST['path'], form=f)
 
     return HttpResponseRedirect(reverse('showfile', args=[pbe.path]))
 
