@@ -1,8 +1,5 @@
-- commenteles (disqus)
-  - http://github.com/arthurk/django-disqus
-  - pip install django-disqus
-- datumozas a jovobe
 - css + javascript szepitgetes
 - css + js tomorites (http://code.google.com/p/django-compress/ + http://djangosnippets.org/snippets/1785/, vagy http://bitbucket.org/aino/aino-jstools/)
 - futtatas (wsgi)
 - kepek kozepes mereture nyomasa
+- datumozas a jovobe

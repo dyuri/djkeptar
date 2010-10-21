@@ -9,6 +9,7 @@
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
+  {% block 'extrahead' %}{% endblock %}
 </head>
 <body>
   <div id="container">
@@ -25,6 +26,8 @@
     {% endblock %}
     </footer>
   </div>
+  {% block 'extrafoot' %}
+  {% endblock %}
 </body>
 </html>
 

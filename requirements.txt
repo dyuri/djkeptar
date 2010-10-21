@@ -1,0 +1,7 @@
+Django==1.2.3
+PIL==1.1.7
+South==0.7.2
+django-disqus==0.3.3
+django-taggit==0.9.1
+ipython==0.10
+pysqlite==2.6.0

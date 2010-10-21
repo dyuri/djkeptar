@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
+{% load disqus_tags %}
+
+{% block 'title' %}{{ block.super }}{% if pbe %} - {{ pbe.title }}{% endif %}{% endblock %}
+
+{% block 'extrahead' %}
+{{ block.super }}
+{% disqus_dev %}
+{% endblock %}
 
 {% block 'main' %}
 {% if pbe %}
 <h1>{{ pbe.title }}</h1>
-{% if searchtag %}<p>Keresés <span class="tag">{{ searchtag }}</span> címke alapján</p>{% endif %}
+{% if searchtag %}<p>Showing items tagged by: <span class="tag">{{ searchtag }}</span></p>{% endif %}
 <div class="nav">
   {% if searchtag %}
     {% url tagsearchid searchtag prev.id as prevurl %}
@@ -13,7 +21,7 @@
     {% url pblog next.id next.title|slugify as nexturl %}
   {% endif %}
   {% if prev %}<a href="{{ prevurl }}">Previous</a>{% endif %}
-  <a href="{% url showfile pbe.path %}">Browse</a>
+  <a href="{% url showfile pbe.path %}">Browse / Comment</a>
   {% if next %}<a href="{{ nexturl}}">Next</a>{% endif %}
 </div>
 
@@ -26,11 +34,16 @@
 <div>
   <img alt="{{ pbe.title }}" src="{{ pbe.fdata.direct_url }}"/>
 </div>
+
+<div id="comments">
+  <a href="{% url showfile pbe.path %}#disqus_thread">View comments</a>{% disqus_num_replies %}
+</div>
+
 {% else %}
 
-<h1>Nincs ilyen kép.</h1>
+<h1>No such image.</h1>
 {% if user.is_authenticated %}
-<a href="{% url listdir '' %}">Böngészés</a>
+<a href="{% url listdir '' %}">Browse the filesystem</a>
 {% endif %}
 
 {% endif %}

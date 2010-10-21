@@ -96,16 +96,19 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'taggit',
+    'disqus',
     'keptar',
 )
 
-KEPTAR_ROOT=os.path.abspath(os.path.join(PROJECT_DIR, 'images'))
-KEPTAR_URL='/images/'
-KEPTAR_EXTENSIONS=['jpg','jpeg','png']
-KEPTAR_THUMBDIR='.tn'
-KEPTAR_THUMBSIZE=(120,120)
-KEPTAR_SHOW_HIDDEN=False
-KEPTAR_ICONS={
+DISQUS_API_KEY = '201YglHp50UQB1gK50Um0UMRIGwlaSGqjUce1YRVVB43L0GRQcFE0Trt3zCHTTCA'
+DISQUS_WEBSITE_SHORTNAME = 'djkeptar-dyuri'
+KEPTAR_ROOT = os.path.abspath(os.path.join(PROJECT_DIR, 'images'))
+KEPTAR_URL = '/images/'
+KEPTAR_EXTENSIONS = ['jpg','jpeg','png']
+KEPTAR_THUMBDIR = '.tn'
+KEPTAR_THUMBSIZE = (120,120)
+KEPTAR_SHOW_HIDDEN = False
+KEPTAR_ICONS = {
         'dir': '/media/icons/tn_dir.jpg',
         }
 

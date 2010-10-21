@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+{% load disqus_tags %}
+
+{% block 'title' %}{{ block.super }} - {{ fname }}{% endblock %}
+
+{% block 'extrahead' %}
+{{ block.super }}
+{% disqus_dev %}
+{% endblock %}
 
 {% block 'main' %}
 <h1>{{ fname }}</h1>
@@ -15,4 +23,10 @@
 <div>
   <img alt="{{ fname }}" src="{{ fdata.direct_url }}"/>
 </div>
+
+<div id="comments">
+{% disqus_show_comments %}
+</div>
+
 {% endblock %}
+
