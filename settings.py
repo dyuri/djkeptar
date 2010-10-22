@@ -109,6 +109,6 @@ KEPTAR_THUMBDIR = '.tn'
 KEPTAR_THUMBSIZE = (120,120)
 KEPTAR_SHOW_HIDDEN = False
 KEPTAR_ICONS = {
-        'dir': '/media/icons/tn_dir.jpg',
+        'dir': '/media/keptar/icons/tn_dir.jpg',
         }
 
