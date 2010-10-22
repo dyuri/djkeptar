@@ -1,18 +1,137 @@
+@font-face { font-family: Delicious; src: url(/media/fonts/delicious-roman.otf); } 
+@font-face { font-family: Delicious; font-weight: bold; src: url(/media/fonts/delicious-bold.otf); }
+
 body {
   background-color: #ccf8ff;
+  font-family: Delicious, sans-serif;
 }
 
 h1 {
   font-size: 1.8em;
-  color: #1166aa;
+  color: #ccf8ff;
+  padding: 4px;
+  height: 32px;
+  line-height: 32px;
+  background-color: #143544;
+  margin-bottom: 4px;
+  text-shadow: 0 0 0.2em #ff0;
+}
+
+a {
+  text-decoration: none;
+  text-shadow: none;
+  color: #116688;
+}
+
+a:hover {
+  color: #3388aa;
+}
+
+h1 a {
+  float: right;
+  height: 30px;
+  width: 30px;
+  overflow: hidden;
+  border: 1px solid #116688;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0 2px;
+}
+
+h1 a:hover {
+  border-color: #3388aa;
+}
+
+h1 a span {
+  display: none;
+}
+
+h1 a.home {
+  background-image: url(/media/images/headerbtns.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+h1 a.home:hover {
+  background-position: 0 -30px;
+}
+
+h1 a.parent {
+  background-image: url(/media/images/headerbtns.png);
+  background-repeat: no-repeat;
+  background-position: -30px 0;
+}
+
+h1 a.parent:hover {
+  background-position: -30px -30px;
+}
+
+h1 a.root {
+  background-image: url(/media/images/headerbtns.png);
+  background-repeat: no-repeat;
+  background-position: -60px 0;
+}
+
+h1 a.root:hover {
+  background-position: -60px -30px;
+}
+
+input {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  margin: 2px 4px;
+  padding: 2px 4px;
+  background-color: #143544;
+  color: #ccf8ff;
+  border: 1px solid #114488;
+}
+
+input.button {
+  color: #114488;
+  background-color: #3388aa;
+  font-weight: bold;
+}
+
+input.button:hover {
+  background-color: #ccf8ff;
+}
+
+#imagewrapper {
+  display: block;
+  float: left;
+  position: relative;
+  clear: both;
+  background-color: #3388aa;
+  color: white;
+  margin: 5px 10px;
+  padding: 5px;
+  border: 1px solid #114488;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: center;
+}
+
+#image {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+#image img {
+  max-width: 600px;
 }
 
 #piclist li {
   display: block;
   float: left;
   position: relative;
-  height: 120px;
-  width: 120px;
+  height: 122px;
+  width: 122px;
   background-color: #3388aa;
   color: white;
   padding: 5px;
@@ -22,10 +141,38 @@ h1 {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   text-align: center;
+  overflow: hidden;
 }
 
-#piclist a {
-  text-decoration: none;
+#piclist li:hover {
+  margin: 1px 7px 5px 3px;
+  -webkit-box-shadow: 2px 2px 5px #143544;
+  -moz-box-shadow: 2px 2px 5px #143544;
+  box-shadow: 2px 2px 5px #143544;
+}
+
+#piclist.rot li:nth-child(4n+1) {
+  -webkit-transform:rotate(2deg);
+  -moz-transform:rotate(2deg);
+  transform:rotate(2deg);
+}
+
+#piclist.rot li:nth-child(4n+2) {
+  -webkit-transform:rotate(-1.2deg);
+  -moz-transform:rotate(-1.2deg);
+  transform:rotate(-1.2deg);
+}
+
+#piclist.rot li:nth-child(4n+3) {
+  -webkit-transform:rotate(-0.5deg);
+  -moz-transform:rotate(-0.5deg);
+  transform:rotate(-0.5deg);
+}
+
+#piclist.rot li:nth-child(4n+4) {
+  -webkit-transform:rotate(5deg);
+  -moz-transform:rotate(5deg);
+  transform:rotate(5deg);
 }
 
 #piclist li span.title {
@@ -34,7 +181,7 @@ h1 {
   left: 0;
   bottom: 0;
   height: 14px;
-  width: 120px;
+  width: 122px;
   font-size: 10px;
   padding: 1px 5px;
   overflow: hidden;
@@ -44,8 +191,107 @@ h1 {
   filter:alpha(opacity=60);
 }
 
+#image img,
+#piclist li img {
+  border: 1px solid #114488;
+  display: block;
+  margin: auto;
+}
+
 #comments {
   width: 580px;
   padding: 10px;
   clear: both;
 }
+
+#pbform {
+  text-align: left;
+  background-color: #143544;
+  color: #ccf8ff;
+  font-size: 12px;
+  z-index: 1;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  opacity: 0.8;
+  filter:alpha(opacity=80);
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#pbform input {
+  width: 200px;
+  font-size: 10px;
+}
+
+#pbform input.button {
+  float: right;
+  width: auto;
+}
+
+.handle {
+  padding: 5px;
+}
+
+#image a {
+  color: white;
+}
+
+#image .nav,
+#image .etc,
+#image .tags {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  z-index: 1;
+  position: absolute;
+  opacity: 0.8;
+  filter:alpha(opacity=80);
+  padding: 3px 5px;
+  background-color: #143544;
+  color: #ccf8ff;
+}
+
+#image .tags {
+  bottom: 1px;
+  left: 1px;
+  -moz-border-radius-topright: 5px;
+  -webkit-border-top-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#image .prev {
+  top: 1px;
+  left: 1px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+#image .next {
+  top: 1px;
+  right: 1px;
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#image .etc {
+  right: 1px;
+  bottom: 1px;
+  -moz-border-radius-topleft: 5px;
+  -webkit-border-top-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+#image .nav a.prev {
+  display: block;
+  float: left;
+}
+
+#image .nav a.next {
+  display: block;
+  float: right;
+}
+

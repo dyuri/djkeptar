@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% block 'main' %}
-<h1>{{ path }}</h1>
-<a href="{% url listdir parent %}">parent{% if parent %} ({{ parent }}){% endif %}</a>
+<h1>Picture browser{% if path %}: {{ path }} 
+  <a class="root" title="Browser from root" href="{% url listdir '' %}"><span>root</span></a>
+  <a class="parent" title="Parent{% if parent %}: {{ parent }}{% endif %}" href="{% url listdir parent %}"><span>parent</span></a>{% endif %}
+  <a class="home" title="Home" href="{% url home %}"><span>home</span></a>
+</h1>
 
 <ul id="piclist">
 {% for fname,fdata in files.items %}
-<li class="{{ fdata.type }}"><a href="{{ fdata.url }}"><img alt="{{ fname }}" src="{{ fdata.thumb }}"/><span class="title">{{ fname }}</span></a></li>
+  <li class="{{ fdata.type }}">
+    <a href="{{ fdata.url }}"><img alt="{{ fname }}" src="{{ fdata.thumb }}"/><span class="title">{{ fname }}</span></a>
+  </li>
 {% endfor %}
 </ul>
 

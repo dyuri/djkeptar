@@ -10,41 +10,51 @@
 
 {% block 'main' %}
 {% if pbe %}
-<h1>{{ pbe.title }}</h1>
-{% if searchtag %}<p>Showing items tagged by: <span class="tag">{{ searchtag }}</span></p>{% endif %}
-<div class="nav">
-  {% if searchtag %}
-    {% url tagsearchid searchtag prev.id as prevurl %}
-    {% url tagsearchid searchtag next.id as nexturl %}
-  {% else %}
-    {% url pblog prev.id prev.title|slugify as prevurl %}
-    {% url pblog next.id next.title|slugify as nexturl %}
-  {% endif %}
-  {% if prev %}<a href="{{ prevurl }}">Previous</a>{% endif %}
-  <a href="{% url showfile pbe.path %}">Browse / Comment</a>
-  {% if next %}<a href="{{ nexturl}}">Next</a>{% endif %}
-</div>
+<h1>{{ pbe.title }}
+  <a class="root" title="Browse from root" href="{% url listdir '' %}"><span>root</span></a>
+  <a class="home" title="Home" href="{% url home %}"><span>home</span></a>
+</h1>
 
-<h2 class="tags">Tags: 
-  {% for tag in pbe.tags.all %}
-  <a class="tag" href="{% url tagsearch tag %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
-  {% endfor %}
-</h2>
+{% if searchtag %}<h2>Showing items tagged by: <span class="tag">{{ searchtag }}</span></h2>{% endif %}
 
-<div>
-  <img alt="{{ pbe.title }}" src="{{ pbe.fdata.direct_url }}"/>
-</div>
+<div id="imagewrapper">
+  <div id="image">
 
-<div id="comments">
-  <a href="{% url showfile pbe.path %}#disqus_thread">View comments</a>{% disqus_num_replies %}
+    {% if searchtag %}
+      {% url tagsearchid searchtag prev.id as prevurl %}
+      {% url tagsearchid searchtag next.id as nexturl %}
+    {% else %}
+      {% url pblog prev.id prev.title|slugify as prevurl %}
+      {% url pblog next.id next.title|slugify as nexturl %}
+    {% endif %}
+    {% if prev %}<a class="prev nav" href="{{ prevurl }}">&lt; Previous</a>{% endif %}
+    {% if next %}<a class="next nav" href="{{ nexturl}}">Next &gt;</a>{% endif %}
+
+    <div class="tags">Tags: 
+      {% for tag in pbe.tags.all %}
+      <a class="tag" href="{% url tagsearch tag %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="etc">
+      <a href="{% url showfile pbe.path %}">Browse</a> |
+      <a href="{% url showfile pbe.path %}#disqus_thread">Comments</a>{% disqus_num_replies %}
+    </div>
+
+    {% if pbe.is_valid %}
+    <img alt="{{ pbe.title }}" src="{{ pbe.fdata.direct_url }}"/>
+    {% else %}
+    <p>Image has been removed...</p>
+    {% endif %}
+  </div>
 </div>
 
 {% else %}
 
-<h1>No such image.</h1>
-{% if user.is_authenticated %}
-<a href="{% url listdir '' %}">Browse the filesystem</a>
-{% endif %}
+<h1>No such image.
+  <a class="root" title="Browse from root" href="{% url listdir '' %}"><span>root</span></a>
+  <a class="home" title="Home" href="{% url home %}"><span>home</span></a>
+</h1>
 
 {% endif %}
 {% endblock %}

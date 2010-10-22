@@ -9,19 +9,32 @@
 {% endblock %}
 
 {% block 'main' %}
-<h1>{{ fname }}</h1>
-<a href="{% url listdir parent %}">parent{% if parent %} ({{ parent }}){% endif %}</a>
+<h1>Picture browser: {{ fname }}
+  <a class="root" title="Browse from root" href="{% url listdir '' %}"><span>root</span></a>
+  <a class="parent" title="Parent{% if parent %}: {{ parent }}{% endif %}" href="{% url listdir parent %}"><span>parent</span></a>
+  <a class="home" title="Home" href="{% url home %}"><span>home</span></a>
+</h1>
 
-{% if pbform %}
-<form action="{% url submitpbentry %}" method="post">
-  {% csrf_token %}
-  {{ pbform.as_p }}
-  <p><input type="submit" name="submitpbe" value="Ok" /></p>
-</form>
-{% endif %}
+<div id="imagewrapper">
+  <div id="image">
 
-<div>
-  <img alt="{{ fname }}" src="{{ fdata.direct_url }}"/>
+    {% if pbform %}
+    <div id="pbform">
+      <div class="handle">PhotoBlog data</div>
+      <div>
+        <form action="{% url submitpbentry %}" method="post">
+          {% csrf_token %}
+          <p><input type="text" name="{{ pbform.title.name }}" {% if pbform.initial.title %}value="{{ pbform.initial.title }}"{% endif %} placeholder="{{ pbform.title.label }}" required /></p>
+          <p><input type="text" name="{{ pbform.tags.name }}" {% if pbform.initial.tags %}value="{% for tag in pbform.initial.tags %}{{ tag.tag }}{% if not forloop.last %}, {% endif %}{% endfor %}"{% endif %} placeholder="{{ pbform.tags.label }}" required /></p>
+          {{ pbform.path }}
+          <p><input class="button" type="submit" name="submitpbe" value="Ok" /></p>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+    <img alt="{{ fname }}" src="{{ fdata.direct_url }}"/>
+  </div>
 </div>
 
 <div id="comments">

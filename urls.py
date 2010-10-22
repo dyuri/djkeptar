@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^pblog/(?P<id>\d+)/(?P<slug>[\w-]*)/$', 'keptar.views.pblog', name='pblog'),
     url(r'^pblog/(?P<id>\d+)/$', 'keptar.views.pblog'),
-    url(r'^/?$', 'keptar.views.pblog'),
+    url(r'^/?$', 'keptar.views.pblog', name='home'),
     url(r'^tag/(?P<tag>[^/]+)/(?P<id>\d+)/$', 'keptar.views.pblog', name='tagsearchid'),
     url(r'^tag/(?P<tag>[^/]+)/', 'keptar.views.pblog', name='tagsearch'),
     url(r'^list/(?P<path>.*)$', 'keptar.views.listdir', name='listdir'),
