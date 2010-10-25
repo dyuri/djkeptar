@@ -120,6 +120,8 @@ input.button:hover {
   padding: 0;
   margin: 0;
   border: 0;
+  min-width: 300px;
+  min-height: 200px;
 }
 
 #image img {

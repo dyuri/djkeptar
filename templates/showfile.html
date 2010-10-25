@@ -16,7 +16,7 @@
 </h1>
 
 <div id="imagewrapper">
-  <div id="image">
+  <div id="image" class="overhandle">
 
     {% if pbform %}
     <div id="pbform">
@@ -33,7 +33,11 @@
     </div>
     {% endif %}
 
-    <img alt="{{ fname }}" src="{{ fdata.direct_url }}"/>
+    <div class="etc showforhandle">
+      <a href="{{ fdata.direct_url }}">Full size</a>
+    </div>
+
+    <img alt="{{ fname }}" src="{{ blogimage }}"/>
   </div>
 </div>
 

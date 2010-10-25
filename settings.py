@@ -105,8 +105,10 @@ DISQUS_WEBSITE_SHORTNAME = 'djkeptar-dyuri'
 KEPTAR_ROOT = os.path.abspath(os.path.join(PROJECT_DIR, 'images'))
 KEPTAR_URL = '/images/'
 KEPTAR_EXTENSIONS = ['jpg','jpeg','png']
-KEPTAR_THUMBDIR = '.tn'
-KEPTAR_THUMBSIZE = (120,120)
+KEPTAR_THUMBS = {
+        '': { 'dir': '.tn', 'size': (120,120) },
+        'blog': { 'dir': '.tn/blog', 'size': (600,600) },
+        }
 KEPTAR_SHOW_HIDDEN = False
 KEPTAR_ICONS = {
         'dir': '/media/keptar/icons/tn_dir.jpg',

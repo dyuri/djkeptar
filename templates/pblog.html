@@ -38,11 +38,12 @@
 
     <div class="etc showforhandle">
       <a href="{% url showfile pbe.path %}">Browse</a> |
+      <a href="{{ pbe.fdata.direct_url }}">Full size</a> |
       <a href="{% url showfile pbe.path %}#disqus_thread">Comments</a>{% disqus_num_replies %}
     </div>
 
     {% if pbe.is_valid %}
-    <img alt="{{ pbe.title }}" src="{{ pbe.fdata.direct_url }}"/>
+    <img alt="{{ pbe.title }}" src="{{ blogimage }}"/>
     {% else %}
     <p>Image has been removed...</p>
     {% endif %}

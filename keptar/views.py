@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from keptar.utils import get_filelist, get_abspath, get_parent, enrich
+from keptar.utils import get_filelist, get_abspath, get_parent, enrich, get_thumbnail
 from keptar.models import PBlogEntry
 from keptar.forms import PBlogEntryForm
 from django.shortcuts import render_to_response
@@ -54,6 +54,7 @@ def showfile(request, fname, form=None):
         'parent': get_parent(fname),
         'fname': fname,
         'fdata': fdata,
+        'blogimage': get_thumbnail(fdata['abspath'], 'blog'),
         }, context_instance = RequestContext(request))
 
 
@@ -124,5 +125,6 @@ def pblog(request, id=None, tag=None, slug=None):
         'pbe': pbe,
         'next': next,
         'prev': prev,
+        'blogimage': get_thumbnail(pbe.fdata['abspath'], 'blog'),
         }, context_instance = RequestContext(request))
 

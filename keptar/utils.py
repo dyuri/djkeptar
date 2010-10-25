@@ -111,9 +111,11 @@ def get_filelist(path, show_hidden=getattr(settings, 'KEPTAR_SHOW_HIDDEN', False
     return enrich(dirs+pictures, relpath=path)
 
 
-def get_thumbnail(file, regenerate=False):
+def get_thumbnail(file, type='', regenerate=False):
     """Visszaadja, illetve ha nem letezik, akkor legeneralja a ``file``-hoz
     tartozo thumbnailt.
+    A ``type``-on keresztul mondhatjuk meg, hogy milyen tipusu thumbnailre
+    van szuksegunk, a tipusok parametereit a ``settings.py``-ben allithatjuk.
     Ha a ``regenerate`` ``True``, akkor ujrageneralja a thumbnailt.
     """
 
@@ -123,19 +125,19 @@ def get_thumbnail(file, regenerate=False):
     
     basename = os.path.basename(file)
     dirname = os.path.dirname(file)
-    thumbname = os.path.join(dirname, settings.KEPTAR_THUMBDIR, basename)
+    thumbname = os.path.join(dirname, settings.KEPTAR_THUMBS[type]['dir'], basename)
     if regenerate or not os.path.isfile(thumbname):
         if not os.path.isdir(os.path.dirname(thumbname)):
             os.mkdir(os.path.dirname(thumbname))
-        generate_thumbnail(file, thumbname)
+        generate_thumbnail(file, thumbname, settings.KEPTAR_THUMBS[type]['size'])
     
     thumburl = getattr(settings, 'KEPTAR_URL', '/media') + thumbname[len(settings.KEPTAR_ROOT):]
 
     return thumburl
 
 
-def generate_thumbnail(file, thumbname):
+def generate_thumbnail(file, thumbname, size):
     image = Image.open(file)
-    image.thumbnail(settings.KEPTAR_THUMBSIZE)
+    image.thumbnail(size)
     image.save(thumbname, image.format)
 
