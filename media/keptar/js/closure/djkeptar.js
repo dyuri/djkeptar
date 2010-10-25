@@ -69,7 +69,7 @@ djkeptar.isChildOf = function(p, c) {
  * @param {number=} opt_time The time of the animation (optional).
  */
 djkeptar.showForOver = function(el, opt_time) {
-  var time = opt_time || djkeptar.config.ANIM_TIME;
+  var time = opt_time || djkeptar.config.anim_time;
 
   goog.events.listen(el, 'mouseover', function(e) {
     var children = el.childNodes;
@@ -114,7 +114,7 @@ djkeptar.showForOver = function(el, opt_time) {
  * @param {number=} opt_time The time of the animation (optional).
  */
 djkeptar.showForClick = function(el, opt_time) {
-  var time = opt_time || djkeptar.config.ANIM_TIME;
+  var time = opt_time || djkeptar.config.anim_time;
 
   goog.events.listen(el, 'click', function(e) {
     var children = el.parentNode.childNodes;
