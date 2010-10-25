@@ -20,8 +20,8 @@
 
     {% if pbform %}
     <div id="pbform">
-      <div class="handle">PhotoBlog data</div>
-      <div>
+      <p class="clickhandle">PhotoBlog data</p>
+      <div class="showforhandle">
         <form action="{% url submitpbentry %}" method="post">
           {% csrf_token %}
           <p><input type="text" name="{{ pbform.title.name }}" {% if pbform.initial.title %}value="{{ pbform.initial.title }}"{% endif %} placeholder="{{ pbform.title.label }}" required /></p>

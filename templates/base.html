@@ -5,6 +5,8 @@
   <title>{% block 'title' %}Keptar{% endblock %}</title>
   <link rel="stylesheet" href="/media/keptar/css/reset.css"/>
   <link rel="stylesheet" href="/media/keptar/css/style.css"/>
+  <script src="/media/keptar/js/closure-library/closure/goog/base.js"></script>
+  <script src="/media/keptar/js/djkeptar.js"></script>
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -26,6 +28,9 @@
     </footer>
   </div>
   {% block 'extrafoot' %}
+  <script>
+    djkeptar.init();
+  </script>
   {% endblock %}
 </body>
 </html>

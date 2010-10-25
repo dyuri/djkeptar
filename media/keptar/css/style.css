@@ -295,3 +295,8 @@ input.button:hover {
   float: right;
 }
 
+.clickhandle {
+  padding: 3px;
+  cursor: pointer;
+}
+
