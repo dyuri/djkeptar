@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from keptar.utils import get_filelist, get_abspath, get_parent, enrich, get_thumbnail
 from keptar.models import PBlogEntry
@@ -25,8 +24,6 @@ def listdir(request, path=""):
 
 def showfile(request, fname, form=None):
     """egy adott kep megjelenitese"""
-
-    # TODO: itt lehet csak valami kisebb felbontasu kepet kene mutatni
 
     # rossz eleresi ut, vagy "trukkozes" eseten hiba
     try:

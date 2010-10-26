@@ -1,5 +1,5 @@
-from django.conf import settings
 from django.core.urlresolvers import reverse
+from keptar import settings
 import os, os.path
 import Image
 try:
