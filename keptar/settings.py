@@ -10,7 +10,7 @@ if KEPTAR_ROOT is None:
 # absolute or relative url to reach the images via http (to support static webservers)
 KEPTAR_URL = getattr(settings, 'KEPTAR_URL', None)
 if KEPTAR_URL is None:
-    raise ImproperlyConfigured('Please make sure you specified a KEPTAR_ROOT setting.')
+    raise ImproperlyConfigured('Please make sure you specified a KEPTAR_URL setting.')
 
 # supported file extensions
 KEPTAR_EXTENSIONS = getattr(settings, 'KEPTAR_EXTENSIONS', ['jpg','jpeg','png'])
